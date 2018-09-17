@@ -13,35 +13,36 @@ namespace web_api
             _repository = repository;
         }
 
-        public Task<Player> Get(Guid id)
+        public Task<Player> GetPlayer(Guid id)
         {
-            return _repository.Get(id);
+            return _repository.GetPlayer(id);
         }
 
-        public Task<Player[]> GetAll()
+        public Task<Player[]> GetAllPlayer()
         {
-            return _repository.GetAll();
+            return _repository.GetAllPlayer();
         }
 
-        public Task<Player> Create(NewPlayer player)
+        public Task<Player> CreatePlayer(NewPlayer player)
         {
             Player newPlayer = new Player();
             newPlayer.Name = player.Name;
-            // set other values for new player
             newPlayer.Id = Guid.NewGuid();
             newPlayer.CreationTime = System.DateTime.Now;
+            newPlayer.Level = player.Level;
+            newPlayer.items = new List<Item>();
 
-            return _repository.Create(newPlayer);
+            return _repository.CreatePlayer(newPlayer);
         }
 
-        public Task<Player> Modify(Guid id, ModifiedPlayer player)
+        public Task<Player> ModifyPlayer(Guid id, ModifiedPlayer player)
         {
-            return _repository.Modify(id, player);
+            return _repository.ModifyPlayer(id, player);
         }
 
-        public Task<Player> Delete(Guid id)
+        public Task<Player> DeletePlayer(Guid id)
         {
-            return _repository.Delete(id);
+            return _repository.DeletePlayer(id);
         }
     }
 }

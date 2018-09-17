@@ -16,24 +16,24 @@ namespace web_api
             _processor = processor;
         }
         [HttpGet("{id:Guid}")]
-        public Task<Player> Get(Guid id) {
-            return _processor.Get(id);
+        public Task<Player> GetPlayer(Guid id) {
+            return _processor.GetPlayer(id);
         }
         [HttpGet]
-        public Task<Player[]> GetAll() {
-            return _processor.GetAll();
+        public Task<Player[]> GetAllPlayer() {
+            return _processor.GetAllPlayer();
         }
         [HttpPost]
-        public Task<Player> Create(NewPlayer player) {
-            return _processor.Create(player);
+        public Task<Player> CreatePlayer(NewPlayer player) {
+            return _processor.CreatePlayer(player);
         }
         [HttpPut("{id:Guid}")]
-        public Task<Player> Modify(Guid id, ModifiedPlayer player) {
-            return _processor.Modify(id, player);
+        public Task<Player> ModifyPlayer(Guid id, ModifiedPlayer player) {
+            return _processor.ModifyPlayer(id, player);
         }
         [HttpDelete("{id:Guid}")]
-        public Task<Player> Delete(Guid id) {
-            return _processor.Delete(id);
+        public Task<Player> DeletePlayer(Guid id) {
+            return _processor.DeletePlayer(id);
         }
 }
     }
