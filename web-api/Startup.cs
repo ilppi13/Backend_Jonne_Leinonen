@@ -27,7 +27,7 @@ namespace web_api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddSingleton<IRepository, InMemoryRepository>();
+            services.AddSingleton<IRepository, MongoDbRepository>();
             services.AddSingleton<PlayersProcessor>();
             services.AddSingleton<ItemsProcessor>();
         }
