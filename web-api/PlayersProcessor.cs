@@ -18,6 +18,16 @@ namespace web_api
             return _repository.GetPlayer(id);
         }
 
+        public Task<Player[]> GetPlayerByTag(string tag)
+        {
+            return _repository.GetPlayerByTag(tag);
+        }
+
+        public Task<Player[]> GetPlayerByName(string name)
+        {
+            return _repository.GetPlayerByName(name);
+        }
+
         public Task<Player[]> GetAllPlayer()
         {
             return _repository.GetAllPlayer();
@@ -31,6 +41,7 @@ namespace web_api
             newPlayer.CreationTime = System.DateTime.Now;
             newPlayer.Level = player.Level;
             newPlayer.items = new List<Item>();
+            newPlayer.tag = player.tag;
 
             return _repository.CreatePlayer(newPlayer);
         }
@@ -43,6 +54,10 @@ namespace web_api
         public Task<Player> DeletePlayer(Guid id)
         {
             return _repository.DeletePlayer(id);
+        }
+
+        public Task<Player[]> GetPlayerMoreScore(int minScore){
+            return _repository.GetPlayerMoreScore(minScore);
         }
     }
 }

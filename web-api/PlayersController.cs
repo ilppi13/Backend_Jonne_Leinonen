@@ -19,6 +19,15 @@ namespace web_api
         public Task<Player> GetPlayer(Guid id) {
             return _processor.GetPlayer(id);
         }
+        [HttpGet("{tag}")]
+        public Task<Player[]> GetPlayerByTag(string tag) {
+            return _processor.GetPlayerByTag(tag);
+        }
+
+        [HttpGet("lol/{name}")]
+        public Task<Player[]> GetPlayerByName(string name) {
+            return _processor.GetPlayerByName(name);
+        }
         [HttpGet]
         public Task<Player[]> GetAllPlayer() {
             return _processor.GetAllPlayer();
@@ -34,6 +43,10 @@ namespace web_api
         [HttpDelete("{id:Guid}")]
         public Task<Player> DeletePlayer(Guid id) {
             return _processor.DeletePlayer(id);
+        }
+        [HttpGet("score/")]
+        public Task<Player[]> GetPlayerMoreScore([FromQuery] int minScore) {
+            return _processor.GetPlayerMoreScore(minScore);
         }
 }
     }

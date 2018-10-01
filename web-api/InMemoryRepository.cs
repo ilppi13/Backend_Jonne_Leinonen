@@ -40,6 +40,32 @@ namespace web_api
             return GetPlayerById(id);
         }
 
+        public async Task<Player[]> GetPlayerByTag(string tag)
+        {
+            await Task.CompletedTask;
+            foreach (Player player in players)
+            {
+                if (player.tag == tag)
+                {
+                    return new Player[]{player};
+                }
+            }
+            return null;
+        }
+
+        public async Task<Player[]> GetPlayerByName(string name)
+        {
+            await Task.CompletedTask;
+            foreach (Player player in players)
+            {
+                if (player.Name == name)
+                {
+                    return new Player[]{player};
+                }
+            }
+            return null;
+        }
+
         public async Task<Player[]> GetAllPlayer()
         {
             await Task.CompletedTask;
@@ -55,6 +81,16 @@ namespace web_api
                 found.Score = player.Score;
             }
             return found;
+        }
+
+        public async Task UpdatePlayerName(Guid id, ModifiedPlayerName player)
+        {
+            await Task.CompletedTask;
+            Player found = GetPlayerById(id);
+            if (found != null)
+            {
+                found.Name = player.name;
+            }
         }
 
         private Player GetPlayerById(Guid id)
@@ -132,6 +168,19 @@ namespace web_api
             {
                 return null;
             }
+        }
+
+        public async Task<Player[]> GetPlayerMoreScore(int minScore) {
+            await Task.CompletedTask;
+            foreach (Player player in players)
+            {
+                if (player.Score > minScore)
+                {
+                    return new Player[]{player};
+                }
+            }
+            return null;
+
         }
     }
 }

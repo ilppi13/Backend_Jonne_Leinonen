@@ -7,5 +7,6 @@ namespace web_api
         public string Name { get; set; }
         [Range(1, 99)]
         public int Level { get; set; }
+        public string tag { get; set; }
     }
 }

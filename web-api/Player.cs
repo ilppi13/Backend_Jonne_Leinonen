@@ -14,5 +14,6 @@ namespace web_api
         public DateTime CreationTime { get; set; }
         public List<Item> items { get; set; }
         public int Level { get; set; }
+        public string tag { get; set;}
     }
 }

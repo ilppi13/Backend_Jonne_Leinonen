@@ -41,6 +41,22 @@ namespace web_api
             return player;
         }
 
+        public async Task<Player[]> GetPlayerByTag(String tag)
+        {
+            var filter = Builders<Player>.Filter.Eq("tag", tag);
+            var cursor = await collection.FindAsync(filter);
+            var player = cursor.ToList();
+            return player.ToArray();
+        }
+
+        public async Task<Player[]> GetPlayerByName(String name)
+        {
+            var filter = Builders<Player>.Filter.Eq("Name", name);
+            var cursor = await collection.FindAsync(filter);
+            var player = cursor.ToList();
+            return player.ToArray();
+        }
+
         public async Task<Player[]> GetAllPlayer()
         {
             var filter = Builders<Player>.Filter.Empty;
@@ -55,6 +71,13 @@ namespace web_api
             var update = Builders<Player>.Update.Set("Score", player.Score);
             var player2 = await collection.FindOneAndUpdateAsync(filter, update);
             return player2;
+        }
+
+        public async Task UpdatePlayerName(Guid id, ModifiedPlayerName player)
+        {
+            var filter = Builders<Player>.Filter.Eq("Id", id);
+            var update = Builders<Player>.Update.Set("Name", player.name);
+            var player2 = await collection.UpdateOneAsync(filter, update);
         }
 
         public async Task<Item> GetItem(Guid playerid, Guid id)
@@ -128,6 +151,14 @@ namespace web_api
             player.items.Remove(found);
             await collection.FindOneAndReplaceAsync(filter, player);
             return found;
+        }
+
+        public async Task<Player[]> GetPlayerMoreScore(int minScore)
+        {
+            var filter = Builders<Player>.Filter.Gt("Score", minScore);
+            var cursor = await collection.FindAsync(filter);
+            var player = cursor.ToList();
+            return player.ToArray();
         }
     }
 }
